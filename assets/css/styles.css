@@ -438,6 +438,20 @@ h1, h2, h3 { font-family: var(--serif); color: var(--slate-ink); font-weight: 60
 .form__submit { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
 .form__note { font-size: 14px; color: #4A5733; min-height: 1.2em; }
 .form__note.is-error { color: #a0432e; }
+.form__consent { font-size: 12.5px; color: var(--wet-stone); margin-top: 0.6rem; max-width: 60ch; }
+.form__consent a { text-decoration: underline; }
+
+/* ---------------------------------------------------------------- legal / privacy page */
+.legal { padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(3rem, 7vw, 5rem); }
+.legal__inner { max-width: 760px; }
+.legal h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 0.5rem; }
+.legal .updated { font-size: 13.5px; color: var(--wet-stone); margin-bottom: 2rem; }
+.legal h2 { font-size: 1.3rem; margin: 2rem 0 0.6rem; }
+.legal p, .legal li { color: var(--wet-stone); }
+.legal p { margin-bottom: 0.9rem; }
+.legal ul { margin: 0 0 0.9rem 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.legal a { text-decoration: underline; }
+.legal__back { display: inline-block; margin-top: 2.5rem; font-weight: 500; }
 
 /* newsletter */
 .newsletter { padding: clamp(3rem, 7vw, 4.5rem) 0; }
