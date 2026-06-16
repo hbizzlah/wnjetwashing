@@ -1,0 +1,5 @@
+# Responsible disclosure for wnjetwashing.co.uk
+Contact: https://wa.me/447926999623
+Expires: 2027-06-16T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://wnjetwashing.co.uk/.well-known/security.txt

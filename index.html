@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Security: strict same-origin policy. The site loads zero third-party resources,
+       so everything is locked to 'self' and inline scripts are disallowed.
+       (frame-ancestors / X-Frame-Options / HSTS need real HTTP headers — see SECURITY.md.) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
   <title>WNJetWashing — Professional Jet Washing in Essex, Herts &amp; NE London</title>
   <meta name="description" content="WNJetWashing — the real-world team that get unreal results. Professional decking, patio and driveway jet washing across Essex, Hertfordshire and North East London. Free quotes, fully insured." />
   <meta name="theme-color" content="#1F2A30" />
@@ -521,17 +528,17 @@
         </div>
         <div>
           <h3>Follow</h3>
-          <a href="https://www.instagram.com/wnjetwashing/" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.tiktok.com/@wnjetwashing" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.instagram.com/wnjetwashing/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.tiktok.com/@wnjetwashing" target="_blank" rel="noopener noreferrer">TikTok</a>
         </div>
       </nav>
       <div class="footer__cta">
         <button class="btn btn--light btn--lg" data-book>Book your quote now! <span aria-hidden="true">↗</span></button>
         <div class="footer__social">
-          <a href="https://www.instagram.com/wnjetwashing/" target="_blank" rel="noopener" aria-label="WNJetWashing on Instagram">
+          <a href="https://www.instagram.com/wnjetwashing/" target="_blank" rel="noopener noreferrer" aria-label="WNJetWashing on Instagram">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
           </a>
-          <a href="https://www.tiktok.com/@wnjetwashing" target="_blank" rel="noopener" aria-label="WNJetWashing on TikTok">
+          <a href="https://www.tiktok.com/@wnjetwashing" target="_blank" rel="noopener noreferrer" aria-label="WNJetWashing on TikTok">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5c.4 0 .7 0 1 .1v2.2a1.4 1.4 0 1 0 1 1.3V3h1.5a4.5 4.5 0 0 0 4 3.4v2.1A6.5 6.5 0 0 1 14 6.6Z" fill="currentColor"/></svg>
           </a>
           <a href="#" data-book aria-label="Message WNJetWashing on WhatsApp">

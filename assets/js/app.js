@@ -5,9 +5,16 @@
 (function () {
   'use strict';
 
+  // Anti-clickjacking: if we've been framed by another origin, break out.
+  try { if (window.top !== window.self) { window.top.location = window.self.location.href; } } catch (_) {}
+
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // HTML-escape any dynamic string before it ever touches innerHTML (defense in depth).
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
 
   /* ===== BOOKING: WhatsApp =================================================
      Replace WHATSAPP_NUMBER with WNJetWashing's real number in international
@@ -83,7 +90,11 @@
   /* ----------------------------------------------------------- QUOTE BASKET */
   const STORE_KEY = 'wnj_basket_v1';
   let basket = [];
-  try { basket = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (_) { basket = []; }
+  // Only ever trust known service names from storage (prevents tampered localStorage from injecting markup).
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORE_KEY)) || [];
+    basket = Array.isArray(stored) ? stored.filter((x) => SERVICES.includes(x)) : [];
+  } catch (_) { basket = []; }
 
   const countEl     = $('[data-basket-count]');
   const drawer      = $('[data-drawer]');
@@ -111,9 +122,9 @@
         const li = document.createElement('li');
         li.className = 'drawer__item';
         li.innerHTML =
-          '<span class="drawer__item-name">' + name +
+          '<span class="drawer__item-name">' + esc(name) +
           '<span class="drawer__item-sub">Quote-based · free visit</span></span>' +
-          '<button class="drawer__remove" data-remove="' + i + '" aria-label="Remove ' + name + '">&times;</button>';
+          '<button class="drawer__remove" data-remove="' + i + '" aria-label="Remove ' + esc(name) + '">&times;</button>';
         drawerList.appendChild(li);
       });
       if (drawerEmpty) drawerEmpty.style.display = n ? 'none' : '';
@@ -124,7 +135,7 @@
       summaryList.innerHTML = '';
       basket.forEach((name) => {
         const li = document.createElement('li');
-        li.innerHTML = '<span>' + name + '</span><span>Quote-based</span>';
+        li.innerHTML = '<span>' + esc(name) + '</span><span>Quote-based</span>';
         summaryList.appendChild(li);
       });
       if (summaryEmpty) summaryEmpty.style.display = n ? 'none' : '';
@@ -132,15 +143,16 @@
   }
 
   function addToBasket(name, sourceBtn) {
+    if (!SERVICES.includes(name)) return; // never add anything but a known service
     if (basket.includes(name)) {
-      toast('Already in your quote — <strong>' + name + '</strong>');
+      toast('Already in your quote — <strong>' + esc(name) + '</strong>');
       openDrawer();
       return;
     }
     basket.push(name);
     persist();
     renderBasket(true);
-    toast('Added — <strong>' + name + '</strong>');
+    toast('Added — <strong>' + esc(name) + '</strong>');
     if (sourceBtn && !REDUCED) flyDroplet(sourceBtn);
   }
 
