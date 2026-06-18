@@ -81,7 +81,9 @@
   }
   function openBooking() {
     const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(whatsappMessage());
-    window.open(url, '_blank', 'noopener');
+    // open in a new tab; if the popup is blocked, fall back to navigating this tab
+    const w = window.open(url, '_blank');
+    if (!w || w.closed || typeof w.closed === 'undefined') { window.location.href = url; }
   }
   document.addEventListener('click', (e) => {
     if (e.target.closest('[data-book]')) { e.preventDefault(); openBooking(); }
@@ -268,7 +270,7 @@
     }
 
     function down(e) {
-      dragging = true; wipe.classList.add('dragging');
+      dragging = true; wipe.classList.add('dragging', 'touched');
       try { wipe.setPointerCapture(e.pointerId); } catch (_) {}
       fromClientX(e.clientX); e.preventDefault();
     }
@@ -284,6 +286,7 @@
 
     if (handle) {
       handle.addEventListener('keydown', (e) => {
+        if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key)) wipe.classList.add('touched');
         if (e.key === 'ArrowLeft' || e.key === 'ArrowDown')  { apply(pos - 4, true); e.preventDefault(); }
         if (e.key === 'ArrowRight' || e.key === 'ArrowUp')   { apply(pos + 4, true); e.preventDefault(); }
         if (e.key === 'Home') { apply(0, true); e.preventDefault(); }
@@ -291,6 +294,32 @@
       });
     }
     apply(REDUCED ? 50 : 58, false); // start slightly toward "before" so the effect reads
+
+    // one-time auto-demo: swipe the slider when it scrolls into view, to show it's interactive
+    if (wipe.hasAttribute('data-wipe-demo') && !REDUCED) {
+      let ran = false;
+      const demo = () => {
+        if (ran || wipe.classList.contains('touched')) return;
+        ran = true;
+        const keys = [[0, 58], [650, 26], [1350, 74], [2000, 50]];
+        const t0 = performance.now();
+        const step = (now) => {
+          if (wipe.classList.contains('touched')) return;
+          const t = now - t0;
+          let i = 0; while (i < keys.length - 1 && t > keys[i + 1][0]) i++;
+          if (i >= keys.length - 1) { apply(50, false); return; }
+          const [t1, p1] = keys[i], [t2, p2] = keys[i + 1];
+          const k = Math.max(0, Math.min(1, (t - t1) / (t2 - t1)));
+          apply(p1 + (p2 - p1) * (1 - Math.pow(1 - k, 3)), false);
+          requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach((en) => { if (en.isIntersecting) { demo(); io.disconnect(); } });
+      }, { threshold: 0.5 });
+      io.observe(wipe);
+    }
   });
 
   /* ----------------------------------------------------------- STAT COUNTERS */
@@ -332,18 +361,6 @@
     }, { threshold: 0.35 });
     io.observe(row);
   });
-
-  /* ----------------------------------------------------------- HEADLINE WASH (decorative; replays on click) */
-  const word = $('[data-reveal-word]');
-  if (word) {
-    const play = () => {
-      if (REDUCED) return;
-      word.classList.remove('is-washing'); void word.offsetWidth; word.classList.add('is-washing');
-    };
-    // initial play shortly after load
-    if (!REDUCED) setTimeout(play, 450);
-    word.addEventListener('click', play); // purely decorative — not a focus stop
-  }
 
   /* ----------------------------------------------------------- PROCESS TIMELINE scroll-fill */
   const line = $('[data-timeline-line]');

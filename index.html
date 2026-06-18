@@ -11,7 +11,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <title>WNJetWashing — Professional Jet Washing in Essex, Herts &amp; NE London</title>
-  <meta name="description" content="WNJetWashing — the real-world team that get unreal results. Professional decking, patio and driveway jet washing across Essex, Hertfordshire and North East London. Free quotes, fully insured." />
+  <meta name="description" content="WNJetWashing — the real-world team that get unreal results. Professional decking, patio and driveway jet washing across Essex, Hertfordshire and North East London. Free, no-obligation quotes." />
   <meta name="theme-color" content="#1F2A30" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png" />
@@ -67,7 +67,12 @@
     <div class="masthead__inner">
       <a class="wordmark" href="#top" aria-label="WNJetWashing home">
         <span class="wordmark__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2.5c3.2 4 5.6 7 5.6 10.2A5.6 5.6 0 0 1 6.4 12.7C6.4 9.5 8.8 6.5 12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M10 3 h4 l-0.8 3.5 h-2.4 z"/><rect x="10.6" y="5.6" width="2.8" height="2" rx="0.6"/>
+            <g stroke="currentColor" stroke-linecap="round" fill="none">
+              <line x1="12" y1="8" x2="5" y2="19" stroke-width="1.5"/><line x1="12" y1="8" x2="8.5" y2="20" stroke-width="1.7"/><line x1="12" y1="8" x2="12" y2="20.5" stroke-width="1.8"/><line x1="12" y1="8" x2="15.5" y2="20" stroke-width="1.7"/><line x1="12" y1="8" x2="19" y2="19" stroke-width="1.5"/>
+            </g>
+          </svg>
         </span>
         <span class="wordmark__text">WN<em>Jet</em>Washing</span>
       </a>
@@ -111,12 +116,7 @@
         <div class="hero__copy">
           <p class="eyebrow">Essex · Herts · NE London — Family-run</p>
           <h1 class="hero__title" id="hero-h1">
-            The real-world team<br />that get
-            <span class="reveal-word" data-reveal-word role="img" aria-label="unreal">
-              <span class="reveal-word__fill">unreal</span>
-              <span class="reveal-word__streak" aria-hidden="true"></span>
-            </span>
-            results
+            The real-world team<br />that get <em class="hero__accent">unreal</em> results
           </h1>
           <p class="hero__lead">We're your friendly, family-run local team — bringing tired decking, patios and driveways back to life right across Essex, Hertfordshire and North East London.</p>
           <div class="hero__cta-row">
@@ -126,24 +126,18 @@
           <ul class="ticks" aria-label="Why choose us">
             <li>Local &amp; family-run</li>
             <li>Free, no-pressure quotes</li>
-            <li>Fully insured</li>
+            <li>Self-sealing aftercare</li>
           </ul>
         </div>
 
-        <!-- WOW DETAIL: draggable real-photo before/after of a drive we cleaned -->
+        <!-- WOW DETAIL: draggable before/after — two real images -->
         <div class="hero__specimen">
-          <figure class="wipe wipe--photo wipe--hero" data-wipe aria-label="Before and after of a real driveway we jet washed — drag to compare">
+          <figure class="wipe wipe--photo wipe--hero" data-wipe data-wipe-demo aria-label="Before and after of a driveway we jet washed — drag to compare">
             <div class="wipe__layer wipe__after">
-              <picture>
-                <source media="(max-width: 600px)" srcset="assets/img/brick-sm.jpg" />
-                <img src="assets/img/brick.jpg" alt="Freshly jet-washed block-paving driveway, clean and bright" width="720" height="900" />
-              </picture>
+              <img src="assets/img/hero-after.jpg" alt="Freshly jet-washed block-paving driveway, clean and bright" width="480" height="600" />
             </div>
             <div class="wipe__layer wipe__before" data-wipe-clip>
-              <picture>
-                <source media="(max-width: 600px)" srcset="assets/img/brick-sm.jpg" />
-                <img src="assets/img/brick.jpg" alt="" aria-hidden="true" width="720" height="900" />
-              </picture>
+              <img src="assets/img/hero-before.jpg" alt="" aria-hidden="true" width="480" height="600" />
             </div>
             <span class="wipe__divider" data-wipe-divider aria-hidden="true"></span>
             <button class="wipe__handle" data-wipe-handle role="slider"
@@ -152,8 +146,8 @@
             </button>
             <span class="wipe__tag wipe__tag--before">Before</span>
             <span class="wipe__tag wipe__tag--after">After</span>
+            <span class="wipe__hint" aria-hidden="true">Drag to compare</span>
           </figure>
-          <p class="hero__specimen-cap">A real drive we cleaned — drag to compare →</p>
         </div>
       </div>
 
@@ -173,10 +167,10 @@
     <!-- ============================ TRUST STRIP ============================ -->
     <section class="trust" aria-label="Credentials and coverage">
       <div class="container trust__ticks">
-        <span>✓ Fully insured</span>
         <span>✓ Local &amp; family-run</span>
         <span>✓ Premium self-sealing aftercare</span>
         <span>✓ Free no-obligation quotes</span>
+        <span>✓ Friendly, on-time, tidy</span>
       </div>
       <div class="marquee" data-marquee aria-hidden="true">
         <div class="marquee__track">
@@ -293,12 +287,12 @@
           <p class="section-intro">Drag the handle across a real driveway we restored. The same surface — one pass of professional jet washing apart.</p>
           <button class="btn btn--primary" data-book>Book your quote now! <span aria-hidden="true">↗</span></button>
         </div>
-        <figure class="wipe wipe--photo reveal" data-wipe data-reveal aria-label="Before and after of a real driveway clean">
+        <figure class="wipe wipe--photo reveal" data-wipe data-wipe-demo data-reveal aria-label="Before and after of a real driveway clean">
           <div class="wipe__layer wipe__after">
-            <img src="assets/img/driveway.jpg" alt="Restored block-paving driveway, clean and bright" loading="lazy" />
+            <img src="assets/img/feature-after.jpg" alt="Restored block-paving driveway, clean and bright" width="640" height="480" loading="lazy" />
           </div>
           <div class="wipe__layer wipe__before" data-wipe-clip>
-            <img src="assets/img/driveway.jpg" alt="" aria-hidden="true" loading="lazy" />
+            <img src="assets/img/feature-before.jpg" alt="" aria-hidden="true" width="640" height="480" loading="lazy" />
           </div>
           <span class="wipe__divider" data-wipe-divider aria-hidden="true"></span>
           <button class="wipe__handle" data-wipe-handle role="slider"
@@ -337,7 +331,7 @@
           </li>
           <li>
             <span class="local__ico" aria-hidden="true">✓</span>
-            <div><strong>Fully insured &amp; careful</strong><span>Tidy, respectful, and covered — your home is in safe hands.</span></div>
+            <div><strong>Tidy &amp; respectful</strong><span>We treat your home like it's our own and clean up after ourselves — every time.</span></div>
           </li>
         </ul>
       </div>
