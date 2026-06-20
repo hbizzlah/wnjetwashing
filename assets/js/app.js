@@ -293,7 +293,7 @@
         if (e.key === 'End')  { apply(100, true); e.preventDefault(); }
       });
     }
-    apply(REDUCED ? 50 : 58, false); // start slightly toward "before" so the effect reads
+    apply(20, false); // default: mostly the CLEAN (after) image, with a sliver of "before" on the left
 
     // one-time auto-demo: swipe the slider when it scrolls into view, to show it's interactive
     if (wipe.hasAttribute('data-wipe-demo') && !REDUCED) {
@@ -301,13 +301,13 @@
       const demo = () => {
         if (ran || wipe.classList.contains('touched')) return;
         ran = true;
-        const keys = [[0, 58], [650, 26], [1350, 74], [2000, 50]];
+        const keys = [[0, 20], [800, 70], [1700, 20]]; // clean → reveal the dirty before → settle back on clean
         const t0 = performance.now();
         const step = (now) => {
           if (wipe.classList.contains('touched')) return;
           const t = now - t0;
           let i = 0; while (i < keys.length - 1 && t > keys[i + 1][0]) i++;
-          if (i >= keys.length - 1) { apply(50, false); return; }
+          if (i >= keys.length - 1) { apply(keys[keys.length - 1][1], false); return; } // settle on the final keyframe
           const [t1, p1] = keys[i], [t2, p2] = keys[i + 1];
           const k = Math.max(0, Math.min(1, (t - t1) / (t2 - t1)));
           apply(p1 + (p2 - p1) * (1 - Math.pow(1 - k, 3)), false);
