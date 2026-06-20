@@ -232,10 +232,28 @@ h1, h2, h3 { font-family: var(--serif); color: var(--slate-ink); font-weight: 60
 .wipe__divider { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 1.5px; background: var(--spray-white); transform: translateX(-50%); box-shadow: 0 0 0 1px rgba(31,42,48,0.15); }
 .wipe__handle {
   position: absolute; top: 50%; left: var(--pos); transform: translate(-50%, -50%);
-  width: 42px; height: 42px; border-radius: 999px; border: 2px solid var(--spray-white);
+  width: 46px; height: 46px; border-radius: 999px; border: 2px solid var(--spray-white);
   background: var(--restored-timber); color: var(--spray-white);
   display: grid; place-items: center; box-shadow: 0 6px 18px -6px rgba(31,42,48,0.6); z-index: 3;
+  cursor: ew-resize; animation: handleBreathe 1.9s ease-in-out infinite;
 }
+/* sonar-ping halo + breathing so it's obvious the handle is draggable (stops once touched) */
+.wipe__handle::before {
+  content: ""; position: absolute; inset: 0; border-radius: 999px; pointer-events: none;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--restored-timber) 65%, transparent);
+  animation: handlePing 1.9s ease-out infinite;
+}
+@keyframes handleBreathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-50%, -50%) scale(1.12); }
+}
+@keyframes handlePing {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--restored-timber) 60%, transparent); }
+  70%  { box-shadow: 0 0 0 18px color-mix(in srgb, var(--restored-timber) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--restored-timber) 0%, transparent); }
+}
+.wipe.touched .wipe__handle { animation: none; }
+.wipe.touched .wipe__handle::before { animation: none; display: none; }
 .wipe__tag {
   position: absolute; top: 14px; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
   text-transform: uppercase; padding: 4px 9px; border-radius: 999px; color: var(--spray-white);
@@ -594,6 +612,8 @@ h1, h2, h3 { font-family: var(--serif); color: var(--slate-ink); font-weight: 60
   .droplets { display: none; }
   .marquee__track { animation: none; flex-wrap: wrap; white-space: normal; }
   .wipe__hint { animation: none; }
+  .wipe__handle { animation: none; transform: translate(-50%, -50%); }
+  .wipe__handle::before { display: none; }
   .svc-row__media { clip-path: inset(0 0 0 0) !important; }
   .timeline__line::after { transform: scaleY(1); }
 }
