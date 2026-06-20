@@ -192,6 +192,14 @@ h1, h2, h3 { font-family: var(--serif); color: var(--slate-ink); font-weight: 60
 /* hero accent word */
 .hero__accent { font-style: italic; color: var(--restored-timber); }
 
+/* call/text fallback line beside the WhatsApp CTAs */
+.contact-alt { font-size: 14.5px; color: var(--wet-stone); margin: 0.85rem 0 0; }
+.contact-alt a { color: var(--timber-text); font-weight: 600; white-space: nowrap; }
+.hero__cta-row + .contact-alt { margin-bottom: 1.2rem; }
+/* on the dark sections (final CTA + footer) */
+.final-cta .contact-alt, .footer .contact-alt { color: rgba(247,244,238,0.82); }
+.final-cta .contact-alt a, .footer .contact-alt a { color: var(--timber-soft); }
+
 .ticks { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; }
 .ticks li { position: relative; padding-left: 1.5rem; font-size: 14.5px; color: var(--wet-stone); }
 .ticks li::before {
